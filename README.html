@@ -1,141 +1,347 @@
 <h1>Gaffer</h1>
 <h2>Modules</h2>
-<ul>
-<li>ExtensionAlgo </li>
-<li>MetadataAlgo </li>
-<li>MonitorAlgo </li>
-<li>NodeAlgo </li>
-<li>ParallelAlgo </li>
-<li>PlugAlgo </li>
-<li>Private </li>
-<li>_Gaffer </li>
-<li>_Range</li>
-</ul>
 <h2>Classes</h2>
 <ul>
-<li>About </li>
-<li>Action </li>
-<li>Animation </li>
-<li>Application </li>
-<li>ApplicationRoot </li>
-<li>ArrayPlug </li>
-<li>AtomicBox2fPlug </li>
-<li>AtomicBox2iPlug </li>
-<li>AtomicBox3fPlug </li>
-<li>AtomicCompoundDataPlug </li>
-<li>Backdrop </li>
-<li>BackgroundTask </li>
-<li>BlockedConnection </li>
-<li>BoolPlug </li>
-<li>BoolVectorDataPlug </li>
-<li>Box </li>
-<li>Box2fPlug </li>
-<li>Box2iPlug </li>
-<li>Box3fPlug </li>
-<li>Box3iPlug </li>
-<li>BoxIO </li>
-<li>BoxIn </li>
-<li>BoxOut </li>
-<li>ChildSet </li>
-<li>Color3fPlug </li>
-<li>Color3fVectorDataPlug </li>
-<li>Color4fPlug </li>
-<li>CompoundDataPlug </li>
-<li>CompoundObjectPlug </li>
-<li>CompoundPathFilter </li>
-<li>ComputeNode </li>
-<li>Connection </li>
-<li>Context </li>
-<li>ContextMonitor </li>
-<li>ContextProcessor </li>
-<li>ContextVariables </li>
-<li>DeleteContextVariables </li>
-<li>DependencyNode </li>
-<li>DictPath </li>
-<li>DirtyPropagationScope </li>
-<li>Dot </li>
-<li>EditScope </li>
-<li>Expression </li>
-<li>FileNamePathFilter </li>
-<li>FileSequencePathFilter </li>
-<li>FileSystemPath </li>
-<li>FloatPlug </li>
-<li>FloatVectorDataPlug </li>
-<li>GraphComponent </li>
-<li>GraphComponentPath </li>
-<li>InfoPathFilter </li>
-<li>IntPlug </li>
-<li>IntVectorDataPlug </li>
-<li>InternedStringVectorDataPlug </li>
-<li>LeafPathFilter </li>
-<li>Loop </li>
-<li>M33fPlug </li>
-<li>M33fVectorDataPlug </li>
-<li>M44fPlug </li>
-<li>M44fVectorDataPlug </li>
-<li>MatchPatternPathFilter </li>
-<li>Metadata </li>
-<li>Monitor </li>
-<li>NameSwitch </li>
-<li>NameValuePlug </li>
-<li>Node </li>
-<li>NodeSerialiser </li>
-<li>NumericBookmarkSet </li>
-<li>ObjectPlug </li>
-<li>ObjectVectorPlug </li>
-<li>OutputRedirection </li>
-<li>Path </li>
-<li>PathFilter </li>
-<li>PathMatcherDataPlug </li>
-<li>PerformanceMonitor </li>
-<li>Plug </li>
-<li>Preferences </li>
-<li>ProcessException </li>
-<li>ProcessMessageHandler </li>
-<li>PythonExpressionEngine </li>
-<li>Random </li>
-<li>Reference </li>
-<li>ReferenceLoadedSignal </li>
-<li>ScopedConnection </li>
-<li>ScriptNode </li>
-<li>SequencePath </li>
-<li>Serialisation </li>
-<li>Set </li>
-<li>ShufflePlug </li>
-<li>ShufflesPlug </li>
-<li>Signal0 </li>
-<li>Signal1 </li>
-<li>Signal2 </li>
-<li>Signal3 </li>
-<li>SplineDefinitionInterpolation </li>
-<li>SplineDefinitionfColor3f </li>
-<li>SplineDefinitionfColor4f </li>
-<li>SplineDefinitionff </li>
-<li>SplinefColor3fPlug </li>
-<li>SplinefColor4fPlug </li>
-<li>SplineffPlug </li>
-<li>Spreadsheet </li>
-<li>StandardSet </li>
-<li>StringPlug </li>
-<li>StringVectorDataPlug </li>
-<li>SubGraph </li>
-<li>Switch </li>
-<li>TimeWarp </li>
-<li>Trackable </li>
-<li>Transform2DPlug </li>
-<li>TransformPlug </li>
-<li>UndoScope </li>
-<li>V2fPlug </li>
-<li>V2iPlug </li>
-<li>V2iVectorDataPlug </li>
-<li>V3fPlug </li>
-<li>V3fVectorDataPlug </li>
-<li>V3iPlug </li>
-<li>ValuePlug </li>
-<li>WeakMethod</li>
+<li>BinaryPlugSignal</li>
+<li>BinarySignal</li>
+<li>ErrorSignal</li>
+<li>UnaryPlugSignal</li>
+<li>UnarySignal</li>
+<li><strong>class</strong></li>
 </ul>
 <h2>Methods</h2>
+<h3>Range</h3>
+<pre><code>def __range( cls, parent ) :
+
+for child in parent.children() :
+    if isinstance( child, cls ) :
+        yield child
+</code></pre>
+<h3>RecursiveRange</h3>
+<pre><code>def __recursiveNodeRange( cls, parent ) :
+
+for i in range( 0, len( parent ) ) :
+    child = parent[i]
+    if isinstance( child, cls ) :
+        yield child
+    if isinstance( child, Gaffer.Node ) :
+        for r in __recursiveNodeRange( cls, child ) :
+            yield r
+</code></pre>
 <h2>Functions</h2>
-<ul>
-<li>isDebug</li>
-</ul>
+<h3><strong>bool</strong></h3>
+<p><strong>bool</strong>( (GraphComponent)arg1) -&gt; bool :</p>
+<pre><code>C++ signature :
+    bool __bool__(Gaffer::GraphComponent {lvalue})
+</code></pre>
+<h3><strong>contains</strong></h3>
+<p><strong>contains</strong>( (GraphComponent)arg1, (InternedString)arg2) -&gt; bool :</p>
+<pre><code>C++ signature :
+    bool __contains__(Gaffer::GraphComponent {lvalue},IECore::InternedString)
+</code></pre>
+<h3><strong>delitem</strong></h3>
+<p><strong>delitem</strong>( (GraphComponent)arg1, (InternedString)arg2) -&gt; None :</p>
+<pre><code>C++ signature :
+    void __delitem__(Gaffer::GraphComponent {lvalue},IECore::InternedString)
+</code></pre>
+<p><strong>delitem</strong>( (GraphComponent)arg1, (int)arg2) -&gt; None :</p>
+<pre><code>C++ signature :
+    void __delitem__(Gaffer::GraphComponent {lvalue},long)
+</code></pre>
+<h3><strong>eq</strong></h3>
+<p><strong>eq</strong>( (RefCounted)arg1, (object)arg2) -&gt; bool :</p>
+<pre><code>C++ signature :
+    bool __eq__(IECore::RefCounted const*,boost::python::api::object)
+</code></pre>
+<h3><strong>getitem</strong></h3>
+<p><strong>getitem</strong>( (GraphComponent)arg1, (InternedString)arg2) -&gt; object :</p>
+<pre><code>C++ signature :
+    boost::intrusive_ptr&lt;Gaffer::GraphComponent&gt; __getitem__(Gaffer::GraphComponent {lvalue},IECore::InternedString)
+</code></pre>
+<p><strong>getitem</strong>( (GraphComponent)arg1, (int)arg2) -&gt; object :</p>
+<pre><code>C++ signature :
+    boost::intrusive_ptr&lt;Gaffer::GraphComponent&gt; __getitem__(Gaffer::GraphComponent {lvalue},long)
+</code></pre>
+<h3><strong>hash</strong></h3>
+<p><strong>hash</strong>( (RefCounted)arg1) -&gt; int :</p>
+<pre><code>C++ signature :
+    long __hash__(IECore::RefCounted const*)
+</code></pre>
+<h3><strong>init</strong></h3>
+<p><strong>init</strong>( (object)arg1 [, (object)name='Node']) -&gt; None :</p>
+<pre><code>C++ signature :
+    void __init__(_object* [,std::string='Node'])
+</code></pre>
+<h3><strong>len</strong></h3>
+<p><strong>len</strong>( (GraphComponent)arg1) -&gt; int :</p>
+<pre><code>C++ signature :
+    int __len__(Gaffer::GraphComponent {lvalue})
+</code></pre>
+<h3><strong>ne</strong></h3>
+<p><strong>ne</strong>( (RefCounted)arg1, (object)arg2) -&gt; bool :</p>
+<pre><code>C++ signature :
+    bool __ne__(IECore::RefCounted const*,boost::python::api::object)
+</code></pre>
+<h3><strong>reduce</strong></h3>
+<p>None</p>
+<h3><strong>repr</strong></h3>
+<p><strong>repr</strong>( (GraphComponent)arg1) -&gt; str :</p>
+<pre><code>C++ signature :
+    std::string __repr__(Gaffer::GraphComponent const*)
+</code></pre>
+<h3><strong>setitem</strong></h3>
+<p><strong>setitem</strong>( (GraphComponent)arg1, (InternedString)arg2, (GraphComponent)arg3) -&gt; None :</p>
+<pre><code>C++ signature :
+    void __setitem__(Gaffer::GraphComponent {lvalue},IECore::InternedString,Gaffer::GraphComponent {lvalue})
+</code></pre>
+<h3>acceptsChild</h3>
+<p>acceptsChild( (Node)arg1, (GraphComponent)arg2) -&gt; bool :</p>
+<pre><code>C++ signature :
+    bool acceptsChild(Gaffer::Node,Gaffer::GraphComponent const*)
+</code></pre>
+<h3>acceptsParent</h3>
+<p>acceptsParent( (Node)arg1, (GraphComponent)arg2) -&gt; bool :</p>
+<pre><code>C++ signature :
+    bool acceptsParent(Gaffer::Node,Gaffer::GraphComponent const*)
+</code></pre>
+<h3>addChild</h3>
+<p>addChild( (GraphComponent)arg1, (GraphComponent)arg2) -&gt; None :</p>
+<pre><code>C++ signature :
+    void addChild(Gaffer::GraphComponent {lvalue},Gaffer::GraphComponent {lvalue})
+</code></pre>
+<h3>ancestor</h3>
+<p>ancestor( (GraphComponent)arg1, (TypeId)arg2) -&gt; object :</p>
+<pre><code>C++ signature :
+    boost::intrusive_ptr&lt;Gaffer::GraphComponent&gt; ancestor(Gaffer::GraphComponent {lvalue},IECore::TypeId)
+</code></pre>
+<h3>baseTypeId</h3>
+<p>baseTypeId([  (TypeId)arg1]) -&gt; TypeId :</p>
+<pre><code>C++ signature :
+    IECore::TypeId baseTypeId([ IECore::TypeId])
+</code></pre>
+<h3>baseTypeIds</h3>
+<p>baseTypeIds( (TypeId)arg1) -&gt; list :</p>
+<pre><code>C++ signature :
+    boost::python::list baseTypeIds(IECore::TypeId)
+</code></pre>
+<h3>baseTypeName</h3>
+<p>baseTypeName() -&gt; str :</p>
+<pre><code>C++ signature :
+    char const* baseTypeName()
+</code></pre>
+<h3>childAddedSignal</h3>
+<p>childAddedSignal( (GraphComponent)arg1) -&gt; BinarySignal :</p>
+<pre><code>C++ signature :
+    boost::signal&lt;void (Gaffer::GraphComponent*, Gaffer::GraphComponent*), boost::last_value&lt;void&gt;, int, std::less&lt;int&gt;, boost::function&lt;void (Gaffer::GraphComponent*, Gaffer::GraphComponent*)&gt; &gt; {lvalue} childAddedSignal(Gaffer::GraphComponent {lvalue})
+</code></pre>
+<h3>childRemovedSignal</h3>
+<p>childRemovedSignal( (GraphComponent)arg1) -&gt; BinarySignal :</p>
+<pre><code>C++ signature :
+    boost::signal&lt;void (Gaffer::GraphComponent*, Gaffer::GraphComponent*), boost::last_value&lt;void&gt;, int, std::less&lt;int&gt;, boost::function&lt;void (Gaffer::GraphComponent*, Gaffer::GraphComponent*)&gt; &gt; {lvalue} childRemovedSignal(Gaffer::GraphComponent {lvalue})
+</code></pre>
+<h3>children</h3>
+<p>children( (GraphComponent)self [, (TypeId)typeId=IECore._IECore.TypeId(110000)]) -&gt; tuple :</p>
+<pre><code>C++ signature :
+    boost::python::tuple children(Gaffer::GraphComponent {lvalue} [,IECore::TypeId=IECore._IECore.TypeId(110000)])
+</code></pre>
+<h3>clearChildren</h3>
+<p>clearChildren( (GraphComponent)arg1) -&gt; None :</p>
+<pre><code>C++ signature :
+    void clearChildren(Gaffer::GraphComponent {lvalue})
+</code></pre>
+<h3>collectGarbage</h3>
+<p>collectGarbage() -&gt; None :</p>
+<pre><code>C++ signature :
+    void collectGarbage()
+</code></pre>
+<h3>commonAncestor</h3>
+<p>commonAncestor( (GraphComponent)self, (GraphComponent)other [, (TypeId)ancestorType=IECore._IECore.TypeId(110000)]) -&gt; object :</p>
+<pre><code>C++ signature :
+    boost::intrusive_ptr&lt;Gaffer::GraphComponent&gt; commonAncestor(Gaffer::GraphComponent {lvalue},Gaffer::GraphComponent const* [,IECore::TypeId=IECore._IECore.TypeId(110000)])
+</code></pre>
+<h3>derivedTypeIds</h3>
+<p>derivedTypeIds( (TypeId)arg1) -&gt; list :</p>
+<pre><code>C++ signature :
+    boost::python::list derivedTypeIds(IECore::TypeId)
+</code></pre>
+<h3>descendant</h3>
+<p>descendant( (GraphComponent)arg1, (object)arg2) -&gt; object :</p>
+<pre><code>C++ signature :
+    boost::intrusive_ptr&lt;Gaffer::GraphComponent&gt; descendant(Gaffer::GraphComponent {lvalue},std::string)
+</code></pre>
+<h3>errorSignal</h3>
+<p>errorSignal( (Node)arg1) -&gt; ErrorSignal :</p>
+<pre><code>C++ signature :
+    boost::signal&lt;void (Gaffer::Plug const*, Gaffer::Plug const*, std::string const&amp;), boost::last_value&lt;void&gt;, int, std::less&lt;int&gt;, boost::function&lt;void (Gaffer::Plug const*, Gaffer::Plug const*, std::string const&amp;)&gt; &gt; {lvalue} errorSignal(Gaffer::Node {lvalue})
+</code></pre>
+<h3>fullName</h3>
+<p>fullName( (GraphComponent)arg1) -&gt; str :</p>
+<pre><code>C++ signature :
+    std::string fullName(Gaffer::GraphComponent {lvalue})
+</code></pre>
+<h3>getChild</h3>
+<p>getChild( (GraphComponent)arg1, (InternedString)arg2) -&gt; object :</p>
+<pre><code>C++ signature :
+    boost::intrusive_ptr&lt;Gaffer::GraphComponent&gt; getChild(Gaffer::GraphComponent {lvalue},IECore::InternedString)
+</code></pre>
+<h3>getName</h3>
+<p>getName( (GraphComponent)arg1) -&gt; str :</p>
+<pre><code>C++ signature :
+    char const* getName(Gaffer::GraphComponent {lvalue})
+</code></pre>
+<h3>inheritsFrom</h3>
+<p>inheritsFrom( (str)arg1) -&gt; bool :</p>
+<pre><code>C++ signature :
+    bool inheritsFrom(char const*)
+</code></pre>
+<p>inheritsFrom( (TypeId)arg1) -&gt; bool :</p>
+<pre><code>C++ signature :
+    bool inheritsFrom(IECore::TypeId)
+</code></pre>
+<p>inheritsFrom( (str)arg1, (str)arg2) -&gt; bool :</p>
+<pre><code>C++ signature :
+    bool inheritsFrom(char const*,char const*)
+</code></pre>
+<p>inheritsFrom( (TypeId)arg1, (TypeId)arg2) -&gt; bool :</p>
+<pre><code>C++ signature :
+    bool inheritsFrom(IECore::TypeId,IECore::TypeId)
+</code></pre>
+<h3>isAncestorOf</h3>
+<p>isAncestorOf( (GraphComponent)arg1, (GraphComponent)arg2) -&gt; bool :</p>
+<pre><code>C++ signature :
+    bool isAncestorOf(Gaffer::GraphComponent {lvalue},Gaffer::GraphComponent const*)
+</code></pre>
+<h3>isInstanceOf</h3>
+<p>isInstanceOf( (Node)arg1, (TypeId)arg2) -&gt; bool :</p>
+<pre><code>C++ signature :
+    bool isInstanceOf(Gaffer::Node {lvalue},IECore::TypeId)
+</code></pre>
+<p>isInstanceOf( (Node)arg1, (str)arg2) -&gt; bool :</p>
+<pre><code>C++ signature :
+    bool isInstanceOf(Gaffer::Node {lvalue},char const*)
+</code></pre>
+<h3>isSame</h3>
+<p>isSame( (RefCounted)arg1, (RefCounted)arg2) -&gt; bool :</p>
+<pre><code>C++ signature :
+    bool isSame(IECore::RefCounted const*,IECore::RefCounted const*)
+</code></pre>
+<h3>items</h3>
+<p>items( (GraphComponent)arg1) -&gt; list :</p>
+<pre><code>C++ signature :
+    boost::python::list items(Gaffer::GraphComponent {lvalue})
+</code></pre>
+<h3>keys</h3>
+<p>keys( (GraphComponent)arg1) -&gt; list :</p>
+<pre><code>C++ signature :
+    boost::python::list keys(Gaffer::GraphComponent {lvalue})
+</code></pre>
+<h3>nameChangedSignal</h3>
+<p>nameChangedSignal( (GraphComponent)arg1) -&gt; UnarySignal :</p>
+<pre><code>C++ signature :
+    boost::signal&lt;void (Gaffer::GraphComponent*), boost::last_value&lt;void&gt;, int, std::less&lt;int&gt;, boost::function&lt;void (Gaffer::GraphComponent*)&gt; &gt; {lvalue} nameChangedSignal(Gaffer::GraphComponent {lvalue})
+</code></pre>
+<h3>numWrappedInstances</h3>
+<p>numWrappedInstances() -&gt; int :</p>
+<pre><code>C++ signature :
+    unsigned long numWrappedInstances()
+</code></pre>
+<h3>parent</h3>
+<p>parent( (GraphComponent)arg1) -&gt; object :</p>
+<pre><code>C++ signature :
+    boost::intrusive_ptr&lt;Gaffer::GraphComponent&gt; parent(Gaffer::GraphComponent {lvalue})
+</code></pre>
+<h3>parentChangedSignal</h3>
+<p>parentChangedSignal( (GraphComponent)arg1) -&gt; BinarySignal :</p>
+<pre><code>C++ signature :
+    boost::signal&lt;void (Gaffer::GraphComponent*, Gaffer::GraphComponent*), boost::last_value&lt;void&gt;, int, std::less&lt;int&gt;, boost::function&lt;void (Gaffer::GraphComponent*, Gaffer::GraphComponent*)&gt; &gt; {lvalue} parentChangedSignal(Gaffer::GraphComponent {lvalue})
+</code></pre>
+<h3>plugDirtiedSignal</h3>
+<p>plugDirtiedSignal( (Node)arg1) -&gt; UnaryPlugSignal :</p>
+<pre><code>C++ signature :
+    boost::signal&lt;void (Gaffer::Plug*), boost::last_value&lt;void&gt;, int, std::less&lt;int&gt;, boost::function&lt;void (Gaffer::Plug*)&gt; &gt; {lvalue} plugDirtiedSignal(Gaffer::Node {lvalue})
+</code></pre>
+<h3>plugFlagsChangedSignal</h3>
+<p>plugFlagsChangedSignal( (Node)arg1) -&gt; UnaryPlugSignal :</p>
+<pre><code>C++ signature :
+    boost::signal&lt;void (Gaffer::Plug*), boost::last_value&lt;void&gt;, int, std::less&lt;int&gt;, boost::function&lt;void (Gaffer::Plug*)&gt; &gt; {lvalue} plugFlagsChangedSignal(Gaffer::Node {lvalue})
+</code></pre>
+<h3>plugInputChangedSignal</h3>
+<p>plugInputChangedSignal( (Node)arg1) -&gt; UnaryPlugSignal :</p>
+<pre><code>C++ signature :
+    boost::signal&lt;void (Gaffer::Plug*), boost::last_value&lt;void&gt;, int, std::less&lt;int&gt;, boost::function&lt;void (Gaffer::Plug*)&gt; &gt; {lvalue} plugInputChangedSignal(Gaffer::Node {lvalue})
+</code></pre>
+<h3>plugSetSignal</h3>
+<p>plugSetSignal( (Node)arg1) -&gt; UnaryPlugSignal :</p>
+<pre><code>C++ signature :
+    boost::signal&lt;void (Gaffer::Plug*), boost::last_value&lt;void&gt;, int, std::less&lt;int&gt;, boost::function&lt;void (Gaffer::Plug*)&gt; &gt; {lvalue} plugSetSignal(Gaffer::Node {lvalue})
+</code></pre>
+<h3>refCount</h3>
+<p>refCount( (RefCounted)arg1) -&gt; int :</p>
+<pre><code>C++ signature :
+    unsigned long refCount(IECore::RefCounted {lvalue})
+</code></pre>
+<h3>registerType</h3>
+<p>registerType( (TypeId)arg1, (str)arg2, (TypeId)arg3) -&gt; None :</p>
+<pre><code>C++ signature :
+    void registerType(IECore::TypeId,char const*,IECore::TypeId)
+</code></pre>
+<h3>relativeName</h3>
+<p>relativeName( (GraphComponent)arg1, (GraphComponent)arg2) -&gt; str :</p>
+<pre><code>C++ signature :
+    std::string relativeName(Gaffer::GraphComponent {lvalue},Gaffer::GraphComponent const*)
+</code></pre>
+<h3>removeChild</h3>
+<p>removeChild( (GraphComponent)arg1, (GraphComponent)arg2) -&gt; None :</p>
+<pre><code>C++ signature :
+    void removeChild(Gaffer::GraphComponent {lvalue},Gaffer::GraphComponent {lvalue})
+</code></pre>
+<h3>scriptNode</h3>
+<p>scriptNode( (Node)arg1) -&gt; object :</p>
+<pre><code>C++ signature :
+    Gaffer::ScriptNode* scriptNode(Gaffer::Node {lvalue})
+</code></pre>
+<h3>setChild</h3>
+<p>setChild( (GraphComponent)arg1, (InternedString)arg2, (GraphComponent)arg3) -&gt; None :</p>
+<pre><code>C++ signature :
+    void setChild(Gaffer::GraphComponent {lvalue},IECore::InternedString,Gaffer::GraphComponent {lvalue})
+</code></pre>
+<h3>setName</h3>
+<p>setName( (GraphComponent)arg1, (InternedString)arg2) -&gt; str :</p>
+<pre><code>C++ signature :
+    char const* setName(Gaffer::GraphComponent {lvalue},IECore::InternedString)
+</code></pre>
+<h3>staticTypeId</h3>
+<p>staticTypeId() -&gt; TypeId :</p>
+<pre><code>C++ signature :
+    IECore::TypeId staticTypeId()
+</code></pre>
+<h3>staticTypeName</h3>
+<p>staticTypeName() -&gt; str :</p>
+<pre><code>C++ signature :
+    char const* staticTypeName()
+</code></pre>
+<h3>typeId</h3>
+<p>typeId( (Node)arg1) -&gt; TypeId :</p>
+<pre><code>C++ signature :
+    IECore::TypeId typeId(Gaffer::Node {lvalue})
+</code></pre>
+<h3>typeIdFromTypeName</h3>
+<p>typeIdFromTypeName( (str)arg1) -&gt; TypeId :</p>
+<pre><code>C++ signature :
+    IECore::TypeId typeIdFromTypeName(char const*)
+</code></pre>
+<h3>typeName</h3>
+<p>typeName( (Node)arg1) -&gt; str :</p>
+<pre><code>C++ signature :
+    char const* typeName(Gaffer::Node {lvalue})
+</code></pre>
+<h3>typeNameFromTypeId</h3>
+<p>typeNameFromTypeId( (TypeId)arg1) -&gt; str :</p>
+<pre><code>C++ signature :
+    char const* typeNameFromTypeId(IECore::TypeId)
+</code></pre>
+<h3>values</h3>
+<p>values( (GraphComponent)arg1) -&gt; list :</p>
+<pre><code>C++ signature :
+    boost::python::list values(Gaffer::GraphComponent {lvalue})
+</code></pre>

@@ -4,60 +4,57 @@
 import inspect
 import markdown
 import Gaffer
+from md_utils import *
 
-members = inspect.getmembers(Gaffer)
+members = inspect.getmembers(Gaffer.Node)
 
-md = '''
-# Gaffer
-'''
+md = '''# Gaffer'''
+md = md_newline(md)
 
-md += '''
-
-## Modules
-'''
+md += '''## Modules'''
 for m in members:
-    print(type(m[1]))
+    #print(type(m[1]))
     if inspect.ismodule(m[1]):
-        md+=''' 
-'''
+        md = md_newline(md)
         md+='''* '''
         md+=(m[0])
 
-md += '''
+md = md_newline(md)
+md += '''## Classes'''
 
-## Classes
-'''
 for m in members:
     if inspect.isclass(m[1]):
-        md+=''' 
-'''
+        md = md_newline(md)
         md+='''* '''
         md+=(m[0])
+        #print( str((m[1]).__doc__) )
 
-md += '''
-
-## Methods
-'''
+md = md_newline(md)
+md += '''## Methods'''
 for m in members:
     if inspect.ismethod(m[1]):
-        md+=''' 
-'''
-        md+='''* '''
+        md = md_newline(md)
+        md+='''### '''
         md+=(m[0])
+        #print( inspect.getsource((m[1]).__func__ ) )
+        #print( inspect.signature((m[1]).__func__ ) )
+        md = md_newline(md)
+        md+=('''	'''+str(inspect.getsource((m[1]).__func__ )))
 
-md += '''
 
-## Functions
-'''
+md = md_newline(md)
+md += '''## Functions'''
+
 for m in members:
     if inspect.isfunction(m[1]) or (str(type(m[1])) =="<class 'Boost.Python.function'>"):
-        md+=''' 
-'''
-        md+='''* '''
+        md = md_newline(md)
+        md+='''### '''
         md+=(m[0])
-
-
-
+        md = md_newline(md)
+    if (str(type(m[1])) =="<class 'Boost.Python.function'>"):
+        md = md_newline(md)
+        md+=(str((m[1]).__doc__))
+        #md+=str( inspect.getsource((m[1]) ) )
 
 with open('README.md', 'w') as f:
     f.write(md)
@@ -65,3 +62,4 @@ with open('README.md', 'w') as f:
 html = markdown.markdown(md)
 with open('README.html', 'w') as f:
     f.write(html)
+
